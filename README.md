@@ -5,5 +5,4 @@ This bash script will install vnc and lubuntu desktop environment for Ubuntu / D
 
 ````
 wget https://raw.githubusercontent.com/crixsz/VNCxDesktopEnvironment/main/install.sh && chmod +x install.sh && ./install.sh
-
 ```
