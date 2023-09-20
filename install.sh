@@ -20,7 +20,16 @@ EOF
     chmod 600 "${VNC_AUTH_DIR}/${VNC_AUTH_FILE}"
     sleep 3
     clear 
-    echo "Installation completed"
+    sleep 3
+    echo "Starting VNC server process...."
+    vncserver
+    echo "Killing any VNC server process..."
+    vncserver -kill :1
+    mv ~/.vnc/xstartup ~/.vnc/xstartup.bak
+    echo "mv ~/.vnc/xstartup ~/.vnc/xstartup.bak" >> ~/.vnc/xstartup
+    chmod +x ~/.vnc/xstartup
+    clear
+    vncserver 
 }
 install(){
   echo "Installing the desktop environment..."
