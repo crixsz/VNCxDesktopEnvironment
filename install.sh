@@ -18,28 +18,45 @@ expect << EOF
             expect eof
 EOF
     chmod 600 "${VNC_AUTH_DIR}/${VNC_AUTH_FILE}"
-    sleep 3
     clear 
     sleep 3
-    echo "Starting VNC server process...."
-    vncserver
-    echo "Killing any VNC server process..."
-    vncserver -kill :1
-    mv ~/.vnc/xstartup ~/.vnc/xstartup.bak
-    echo "mv ~/.vnc/xstartup ~/.vnc/xstartup.bak" >> ~/.vnc/xstartup
-    chmod +x ~/.vnc/xstartup
-    clear
-    vncserver 
+    
+
+}
+uninstall(){
+  echo "Starting uninstallation ..."
+  sleep 2
 }
 install(){
   echo "Installing the desktop environment..."
   apt update -y
   apt install xfce4 xfce4-goodies -y
+  clear
+  echo "[ Successfully installed XFCE4 ]"
+  sleep 3
+  clear
+  echo "Installing tighvncserver ..."
   apt install tightvncserver -y
   clear
+  echo "[ Successfully installed tightvncserver ]"
   sleep 3
+  clear
   echo "Generating password for the VNC server"
   generate_pass
+  echo "Starting VNC server process...."
+  vncserver
+  sleep 3
+  echo "Killing any VNC server process..."
+  vncserver -kill :1
+  mv ~/.vnc/xstartup ~/.vnc/xstartup.bak
+  echo -e"
+  xrdb $HOME/.Xresources
+  startxfce4 & 
+  " >> ~/.vnc/xstartup
+  chmod +x ~/.vnc/xstartup
+  sleep 2
+  clear
+  vncserver 
 }
 
 
